@@ -7,30 +7,26 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryService {
-  static Future<List<Category>> categoryList() async {
+  Future<List<Category>> categoryList() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
 
-    String? token = sp.getString("token");
+    String? token = await sp.getString("token");
+
+    if (token == null) {
+      throw new Exception('ERROR TOKEN NULL');
+    }
 
     var url = Uri.parse(baseUrl + 'categories');
 
-    final header = {
-      'Authorization': 'Bearer $token',
-    };
-
-    var apiResult = await http.get(
+    final apiResult = await http.get(
       url,
-      headers: header,
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer $token',
+      },
     );
 
-    var jsonObject = json.decode(apiResult.body);
-    List<dynamic> listCategory = (jsonObject as Map<String, dynamic>)['data'];
+    final payload = (jsonDecode(apiResult.body)['data'] as List);
 
-    List<Category> categories = [];
-    for (int i = 0; i < listCategory.length; i++) {
-      categories.add(Category.createCategory(listCategory[i]));
-    }
-
-    return categories;
+    return payload.map((e) => Category.fromJson(e)).toList();
   }
 }

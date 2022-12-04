@@ -9,6 +9,13 @@ class Category {
     required this.name,
   });
 
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'],
+      name: json['name'],
+    );
+  }
+
   factory Category.createCategory(Map<String, dynamic> object) {
     return Category(
       id: object['id'],
@@ -42,7 +49,7 @@ class Category {
 
   String toJson() => json.encode(toMap());
 
-  factory Category.fromJson(String source) =>
+  factory Category.fromJson1(String source) =>
       Category.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override

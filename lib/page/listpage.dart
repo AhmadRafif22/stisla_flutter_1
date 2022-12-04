@@ -12,6 +12,7 @@ import 'dart:convert';
 import 'package:stisla_flutter/page/login.dart';
 
 import '../Service/category_service.dart';
+import '../models/category.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
@@ -22,55 +23,52 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   @override
+  List<Category> listCategories = [];
+  final cs = CategoryService();
+
+  getData() async {
+    listCategories = await cs.categoryList();
+  }
+
   void initState() {
     // TODO: implement initState
     super.initState();
-    // context.read<CategoryService>.categoryList();
-  }
-
-  logoutPressed() async {
-    http.Response response = await AuthServices.logout();
-
-    if (response.statusCode == 204) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const LoginPage(),
-          ));
-    } else {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (BuildContext context) => const ListPage(),
-          ));
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("List Page"),
+        title: const Text("List Category"),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            Container(
-              margin: EdgeInsets.all(15.0),
-              width: double.infinity,
-              height: 40,
-              // convert button
-              child: ElevatedButton(
-                onPressed: logoutPressed,
-                child: Text('Logout'),
-              ),
-            ),
+            Container(),
             Expanded(
-              child: ListView(
-                children: [
-                  Text('tes'),
-                ],
+              child: FutureBuilder(
+                future: cs.categoryList(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return ListView(
+                      children: (snapshot.data ?? [])
+                          .map(
+                            (e) => Card(
+                              margin: EdgeInsets.all(4.0),
+                              color: Colors.blueGrey[50],
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Text(e.name),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    );
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                },
               ),
             ),
           ],

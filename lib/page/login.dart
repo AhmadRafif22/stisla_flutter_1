@@ -5,6 +5,7 @@ import 'package:stisla_flutter/Service/auth_service.dart';
 import 'package:stisla_flutter/Service/globals.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:stisla_flutter/page/homepage.dart';
 import 'dart:convert';
 
 import 'package:stisla_flutter/page/listpage.dart';
@@ -36,11 +37,13 @@ class _LoginPageState extends State<LoginPage> {
       http.Response response = await AuthServices.login(_email, _password);
       Map responseMap = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (BuildContext context) => const ListPage(),
-            ));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => const HomePage(),
+          ),
+          (route) => false,
+        );
       } else {
         errorSnackBar(context, responseMap.values.first);
       }
