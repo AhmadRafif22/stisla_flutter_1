@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const String baseUrl = "http://localhost:8000/api/";
+// const String baseUrl = "http://192.168.72.205:8000/api/";
 const Map<String, String> headers = {"Content-Type": "application/json"};
 
 errorSnackBar(BuildContext context, String text) {

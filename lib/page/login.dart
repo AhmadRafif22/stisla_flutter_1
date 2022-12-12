@@ -24,18 +24,21 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    __email.text = "superadmin@gmail.com";
-    __password.text = "password";
+    // __email.text = "superadmin@gmail.com";
+    // __password.text = "password";
   }
 
   @override
-  String _email = 'superadmin@gmail.com';
-  String _password = 'password';
+  // String _email = 'superadmin@gmail.com';
+  // String _password = 'password';
+  String _email = '';
+  String _password = '';
 
   loginPressed() async {
     if (_email.isNotEmpty && _password.isNotEmpty) {
       http.Response response = await AuthServices.login(_email, _password);
       Map responseMap = jsonDecode(response.body);
+      print(response.body);
       if (response.statusCode == 200) {
         Navigator.pushAndRemoveUntil(
           context,
@@ -45,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
           (route) => false,
         );
       } else {
-        errorSnackBar(context, responseMap.values.first);
+        errorSnackBar(context, 'wrong email or password');
       }
     } else {
       errorSnackBar(context, 'enter all required fields');
