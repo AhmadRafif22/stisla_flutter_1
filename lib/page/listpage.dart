@@ -7,6 +7,7 @@ import 'package:stisla_flutter/Service/auth_service.dart';
 import 'package:stisla_flutter/Service/globals.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:stisla_flutter/page/add_category.dart';
 import 'dart:convert';
 
 import 'package:stisla_flutter/page/login.dart';
@@ -45,7 +46,26 @@ class _ListPageState extends State<ListPage> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            Container(),
+            Container(
+              margin: EdgeInsets.all(15.0),
+              width: 300,
+              height: 40,
+              // convert button
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CreateCategory(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.green, // Background color
+                ),
+                child: Text('Add Category'),
+              ),
+            ),
             Expanded(
               child: FutureBuilder(
                 future: cs.categoryList(),

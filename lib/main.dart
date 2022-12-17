@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:stisla_flutter/page/add_category.dart';
 import 'package:stisla_flutter/page/listpage.dart';
 import 'package:stisla_flutter/page/login.dart';
 import 'package:stisla_flutter/page/homepage.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         "/listpage": (context) => const ListPage(),
         "/homepage": (context) => const HomePage(),
         "/register": (context) => const RegisterPage(),
+        "/addCategory": (context) => const CreateCategory(),
       },
       initialRoute: "/",
       title: 'Flutter Demo',
