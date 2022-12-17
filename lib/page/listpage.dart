@@ -8,6 +8,7 @@ import 'package:stisla_flutter/Service/globals.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:stisla_flutter/page/add_category.dart';
+import 'package:stisla_flutter/page/homepage.dart';
 import 'dart:convert';
 
 import 'package:stisla_flutter/page/login.dart';
@@ -47,6 +48,27 @@ class _ListPageState extends State<ListPage> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
+            Container(
+              margin: EdgeInsets.all(0),
+              width: 300,
+              height: 40,
+              // convert button
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const HomePage(),
+                    ),
+                    (route) => false,
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.red, // Background color
+                ),
+                child: Text('Homepage'),
+              ),
+            ),
             Container(
               margin: EdgeInsets.all(15.0),
               width: 300,
