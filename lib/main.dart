@@ -5,6 +5,7 @@ import 'package:stisla_flutter/page/listpage.dart';
 import 'package:stisla_flutter/page/login.dart';
 import 'package:stisla_flutter/page/homepage.dart';
 import 'package:stisla_flutter/page/register.dart';
+import 'package:stisla_flutter/page/update_category.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         "/homepage": (context) => const HomePage(),
         "/register": (context) => const RegisterPage(),
         "/addCategory": (context) => const CreateCategory(),
+        "/updateCategory": (context) => UpdateCategory(),
       },
       initialRoute: "/",
       title: 'Flutter Demo',

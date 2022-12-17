@@ -11,6 +11,7 @@ import 'package:stisla_flutter/page/add_category.dart';
 import 'dart:convert';
 
 import 'package:stisla_flutter/page/login.dart';
+import 'package:stisla_flutter/page/update_category.dart';
 
 import '../Service/category_service.dart';
 import '../models/category.dart';
@@ -83,12 +84,13 @@ class _ListPageState extends State<ListPage> {
                             if (direction == DismissDirection.endToStart) {
                               cs.deleteCategory(category);
                             } else {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => EditTaskPage(task: task),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      UpdateCategory(category: category),
+                                ),
+                              );
                             }
                             ;
                           },

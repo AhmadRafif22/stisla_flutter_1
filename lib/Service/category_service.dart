@@ -96,4 +96,26 @@ class CategoryService {
 
     return response;
   }
+
+  static Future updateCategory(Category category, String newName) async {
+    final sp = await SharedPreferences.getInstance();
+
+    var Url = Uri.parse(baseUrl + 'categories/${category.id}');
+
+    final token = sp.getString('token');
+
+    final response = await http.put(
+      Url,
+      headers: {
+        "Accept": "application/json",
+        "Access-Control_Allow_Origin": "*",
+        HttpHeaders.authorizationHeader: 'Bearer $token',
+      },
+      body: {
+        "name": newName,
+      },
+    );
+
+    return response;
+  }
 }
