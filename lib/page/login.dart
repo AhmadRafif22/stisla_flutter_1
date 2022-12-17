@@ -30,6 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences sp = await SharedPreferences.getInstance();
     email_registered = sp.getString('email');
     pass_registered = sp.getString('password');
+
     __email.text =
         email_registered == '' ? "superadmin@gmail.com" : email_registered!;
     __password.text = pass_registered == '' ? "password" : pass_registered!;

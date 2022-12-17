@@ -25,7 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController __name =
       TextEditingController(text: "Ahmad Rafif Alaudin");
   TextEditingController __email =
-      TextEditingController(text: "superadmin@gmail.com");
+      TextEditingController(text: "tesregister@gmail.com");
   TextEditingController __password = TextEditingController(text: "password");
   TextEditingController __confirm = TextEditingController(text: "password");
   TextEditingController __device_name = TextEditingController(text: "Desktop");
