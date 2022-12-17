@@ -71,20 +71,56 @@ class _ListPageState extends State<ListPage> {
                 future: cs.categoryList(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return ListView(
-                      children: (snapshot.data ?? [])
-                          .map(
-                            (e) => Card(
-                              margin: EdgeInsets.all(4.0),
+                    List<Category>? listCategories = snapshot.data;
+                    print(listCategories);
+                    return ListView.builder(
+                      itemCount: snapshot.data?.length,
+                      itemBuilder: (context, index) {
+                        var category = listCategories![index];
+                        return Dismissible(
+                          key: UniqueKey(),
+                          onDismissed: (direction) {
+                            if (direction == DismissDirection.endToStart) {
+                            } else {}
+                            ;
+                          },
+                          background: Container(
+                            color: Colors.green,
+                            child: Row(
+                              children: [
+                                Icon(Icons.edit, color: Colors.white),
+                                Text('Edit Task',
+                                    style: TextStyle(color: Colors.white)),
+                              ],
+                            ),
+                          ),
+                          secondaryBackground: Container(
+                            color: Colors.red,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Icon(Icons.delete, color: Colors.white),
+                                Text('Delete Task',
+                                    style: TextStyle(color: Colors.white)),
+                              ],
+                            ),
+                          ),
+                          child: ListTile(
+                            title: Container(
                               color: Colors.blueGrey[50],
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: Text(e.name),
+                              padding: const EdgeInsets.all(20.0),
+                              width: double.infinity,
+                              child: Text(
+                                category.name,
+                                textAlign: TextAlign.center,
                               ),
                             ),
-                          )
-                          .toList(),
+                          ),
+                        );
+                      },
                     );
+
+                    // return ListView();
                   } else {
                     return const Center(child: CircularProgressIndicator());
                   }
