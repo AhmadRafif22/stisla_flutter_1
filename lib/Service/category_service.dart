@@ -70,4 +70,30 @@ class CategoryService {
       throw Exception('Failed to Create Category.');
     }
   }
+
+  Future<Response> deleteCategory(Category category) async {
+    var url = Uri.parse(baseUrl + 'categories/${category.id}');
+
+    SharedPreferences sp = await SharedPreferences.getInstance();
+
+    String? token = await sp.getString("token");
+
+    if (token == null) {
+      throw new Exception('ERROR TOKEN NULL');
+    }
+
+    final headers = {
+      'Accept': 'application/json',
+      HttpHeaders.authorizationHeader: 'Bearer $token',
+    };
+
+    final response = await delete(
+      url,
+      headers: headers,
+    );
+
+    print(response.statusCode);
+
+    return response;
+  }
 }

@@ -81,7 +81,15 @@ class _ListPageState extends State<ListPage> {
                           key: UniqueKey(),
                           onDismissed: (direction) {
                             if (direction == DismissDirection.endToStart) {
-                            } else {}
+                              cs.deleteCategory(category);
+                            } else {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => EditTaskPage(task: task),
+                              //   ),
+                              // );
+                            }
                             ;
                           },
                           background: Container(
