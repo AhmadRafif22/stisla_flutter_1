@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:stisla_flutter/page/listpage.dart';
 import 'package:stisla_flutter/page/login.dart';
 import 'package:stisla_flutter/page/homepage.dart';
+import 'package:stisla_flutter/page/register.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => const LoginPage(),
         "/listpage": (context) => const ListPage(),
         "/homepage": (context) => const HomePage(),
+        "/register": (context) => const RegisterPage(),
       },
       initialRoute: "/",
       title: 'Flutter Demo',
